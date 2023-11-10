@@ -414,28 +414,34 @@ function add_layers() {
         echo "Processing ${layer}"
         case ${layer} in
             intel )
-                bitbake-layers add-layer ../meta-intel
+                LAYER="../meta-intel"
                 ;;
             oe )
-                bitbake-layers add-layer ../meta-openembedded/meta-oe
+                LAYER="../meta-openembedded/meta-oe"
                 ;;
             python )
-                bitbake-layers add-layer ../meta-openembedded/meta-python
+                LAYER="../meta-openembedded/meta-python"
                 ;;
             networking )
-                bitbake-layers add-layer ../meta-openembedded/meta-networking
+                LAYER="../meta-openembedded/meta-networking"
                 ;;
             skeleton )
-                bitbake-layers add-layer ../meta-skeleton
+                LAYER="../meta-skeleton"
                 ;;
             freertos )
-                bitbake-layers add-layer ${SELF}/layers/meta-freertos
+                LAYER="${SELF}/layers/meta-freertos"
                 ;;
             *)
-                echo "Requested layer is not known"
+                echo "Requested layer: ${layer} is not known"
                 ;;
         esac
+        bitbake-layers add-layer ${LAYER}
+        ECODE=$?
+        if [ $ECODE -ne 0 ]; then
+            exit 1
+        fi
     done
+    
     if [ ! -z "${SELF}" ]; then
         bitbake-layers add-layer ${SELF}
     fi
