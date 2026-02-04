@@ -291,8 +291,8 @@ function create_local_dirs() {
 
 function localconf() {
 
-    cd ~/poky
-    source oe-init-build-env
+    cd ~/
+    source openembedded-core/oe-init-build-env
     echo "SSTATE_DIR = \"${SSTATE_DIR}\"" >> ./conf/local.conf
     echo "DL_DIR = \"${DL_DIR}\"" >> ./conf/local.conf
     if [ ! -z "${DISTRO}" ]; then
@@ -307,7 +307,7 @@ function localconf() {
     ###
 
     # Use pipeline artifact
-    echo "SSTATE_MIRRORS=\" file://.* file://${SSTATE_MIRRORS_DIR}PATH\"" >> ./conf/local.conf
+    echo "SSTATE_MIRRORS = \" file://.* file://${SSTATE_MIRRORS_DIR}PATH\"" >> ./conf/local.conf
 
     # # Keep for compatibility, az fetcher sstate and downloads
     # if [ ! -z "${AZ_SAS}" ]; then
@@ -340,18 +340,10 @@ function clone_layers() {
         GITHUB=0
     fi
     if [ "${GITHUB}" -ne 1 ]; then
-        if [ "${BRANCH}" == "honister" ]; then
+        if [ "${BRANCH}" == "scarthgap" ]; then
             BRANCHNAME=${BRANCH}
-        elif [ "${BRANCH}" == "dunfell" ]; then
-            BRANCHNAME=${BRANCH}
-        elif [ "${BRANCH}" == "dunfell-next" ]; then
-            BRANCHNAME="dunfell"
-        elif [ "${BRANCH}" == "kirkstone" ]; then
-            BRANCHNAME=${BRANCH}
-        elif [ "${BRANCH}" == "kirkstone-next" ]; then
-            BRANCHNAME="kirkstone"
-        elif [ "${BRANCH}" == "mickledore" ]; then
-            BRANCHNAME=${BRANCH}
+        elif [ "${BRANCH}" == "scarthgap-next" ]; then
+            BRANCHNAME="scarthgap"
         elif [ "${BRANCH}" == "master-next" ]; then
             BRANCHNAME="master"
         else
@@ -368,18 +360,19 @@ function clone_layers() {
     do
         echo "Processing ${layer}"
         case ${layer} in
-            poky )
+            oe )
                 ###
                 ###  In case we need local changes
                 ###
                 if [ "${GITHUB}" -ne 1 ]; then
-                    echo "Cloning from Poky"
-                    git clone git://git.yoctoproject.org/poky -b ${BRANCHNAME}
+                    echo "Cloning from OE"
+                    git clone https://git.openembedded.org/openembedded-core -b ${BRANCHNAME}
+                    git clone https://git.openembedded.org/bitbake -b ${BRANCHNAME}
                 else
                     echo "Cloning from Github"
                     git clone https://github.com/ahcbb6/poky.git -b ${BRANCHNAME}
                 fi
-                cd poky
+                cd openembedded-core/
                 # Print out where we were before rebase
                 git show
                 # Add Az fetcher to Dunfell
@@ -395,10 +388,7 @@ function clone_layers() {
                 git clone https://git.yoctoproject.org/git/meta-intel -b ${BRANCHNAME}
                 ;;
             oe )
-                git clone git://git.openembedded.org/meta-openembedded -b ${BRANCHNAME}
-                ;;
-            oe )
-                git clone git://git.openembedded.org/meta-openembedded -b ${BRANCHNAME}
+                git clone https://git.openembedded.org/meta-openembedded -b ${BRANCHNAME}
                 ;;
             *)
                 echo "Requested layer is not known"
