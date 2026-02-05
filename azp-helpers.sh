@@ -66,10 +66,13 @@ function free_space_packages() {
     ?name(ghc.*) \
     ?name(google-chrome-stable.*) \
     ?name(google-cloud-sdk.*) \
+    ?name(google-cloud-cli.*) \
+    ?name(google-cloud-cli-anthoscli.*) \
     ?name(hhvm.*) \
     ?name(initramfs-tools.*) \
     ?name(iso-codes.*) \
     ?name(isocodes.*) \
+    ?name(kubectl.*) \
     ?name(libclang-common.*) \
     ?name(libclang-cpp.*) \
     ?name(libclang1.*) \
@@ -287,6 +290,8 @@ function create_local_dirs() {
     sudo chown vsts:vsts ${DL_DIR}
     sudo chown vsts:vsts ${SSTATE_MIRRORS_DIR}
     sudo chown vsts:vsts ${DEPLOY_ARTIFACTS_DIR}
+    check_freespace
+    purge_space
     analyze_storage
 }
 
