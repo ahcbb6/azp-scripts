@@ -360,7 +360,7 @@ function clone_layers() {
     do
         echo "Processing ${layer}"
         case ${layer} in
-            oe )
+            oe-core )
                 ###
                 ###  In case we need local changes
                 ###
@@ -384,6 +384,9 @@ function clone_layers() {
                 # git rebase master
                 git log --pretty=oneline -n 20
                 ;;
+            yocto )
+                git clone https://git.yoctoproject.org/meta-yocto -b ${BRANCHNAME}
+                ;;
             intel )
                 git clone https://git.yoctoproject.org/git/meta-intel -b ${BRANCHNAME}
                 ;;
@@ -403,6 +406,9 @@ function add_layers() {
     do
         echo "Processing ${layer}"
         case ${layer} in
+            oe-core )
+                LAYER="../openembedded-core"
+                ;;
             intel )
                 LAYER="../meta-intel"
                 ;;
@@ -420,6 +426,12 @@ function add_layers() {
                 ;;
             freertos )
                 LAYER="${SELF}/layers/meta-freertos"
+                ;;
+            yocto )
+                LAYER="${SELF}/layers/meta-yocto-bsp"
+                ;;
+            poky )
+                LAYER="${SELF}/layers/meta-poky"
                 ;;
             *)
                 echo "Requested layer: ${layer} is not known"
