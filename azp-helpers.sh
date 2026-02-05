@@ -402,6 +402,7 @@ function clone_layers() {
 
 function add_layers() {
     print_section "Creating bblayers.conf"
+    find ~/
     for layer in "$@"
     do
         echo "Processing ${layer}"
@@ -428,10 +429,10 @@ function add_layers() {
                 LAYER="${SELF}/layers/meta-freertos"
                 ;;
             yocto )
-                LAYER="${SELF}/layers/meta-yocto-bsp"
+                LAYER="${SELF}/layers/meta-yocto/meta-yocto-bsp"
                 ;;
             poky )
-                LAYER="${SELF}/layers/meta-poky"
+                LAYER="${SELF}/layers/meta-yocto/meta-poky"
                 ;;
             *)
                 echo "Requested layer: ${layer} is not known"
