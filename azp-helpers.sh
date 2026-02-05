@@ -126,9 +126,9 @@ function free_space_packages() {
 
 function analyze_storage() {
     print_section "Analyzing Storage"
-    sudo DEBIAN_FRONTEND=noninteractive apt -yq install durep wajig >/dev/null
-    print_section "Largest packages"
-    wajig large
+    sudo DEBIAN_FRONTEND=noninteractive apt -yq install durep >/dev/null
+    # print_section "Largest packages"
+    # wajig large
     print_section "Largest files (dh/du)"
     df -h
     du -Sh / 2>/dev/null | sort -rh | head -n 200
@@ -226,6 +226,9 @@ function purge_space () {
     /home/vsts/agents/2.160.1/ \
     /home/vsts/agents/2.162.0/ \
     /home/vsts/agents/2.171.1/ \
+    /home/vsts/.rustup/ \
+    /etc/skel/.rustup/ \
+    /usr/share/sbt/bin \
     /imagegeneration/ \
     /opt/* \
     /usr/lib/cgi-bin \
