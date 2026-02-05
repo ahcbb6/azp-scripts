@@ -383,6 +383,7 @@ function clone_layers() {
                 # git checkout gh/azfetcher-fixes-${BRANCHNAME} -b azfetcher-fixes-${BRANCHNAME}
                 # git rebase master
                 git log --pretty=oneline -n 20
+                cd -
                 ;;
             yocto )
                 git clone https://git.yoctoproject.org/meta-yocto -b ${BRANCHNAME}
@@ -429,10 +430,10 @@ function add_layers() {
                 LAYER="${SELF}/layers/meta-freertos"
                 ;;
             yocto )
-                LAYER="${SELF}/layers/meta-yocto/meta-yocto-bsp"
+                LAYER="../meta-yocto/meta-yocto-bsp"
                 ;;
             poky )
-                LAYER="${SELF}/layers/meta-yocto/meta-poky"
+                LAYER="../meta-yocto/meta-poky"
                 ;;
             *)
                 echo "Requested layer: ${layer} is not known"
