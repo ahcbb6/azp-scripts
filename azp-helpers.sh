@@ -28,7 +28,7 @@ function global_variables_pipeline() {
     echo "##vso[task.setvariable variable=DEPLOY_ARTIFACTS_DIR;]${DEPLOY_ARTIFACTS_DIR}"
     echo "##vso[task.setvariable variable=SSTATE_DIR;]${SSTATE_DIR}"
     echo "##vso[task.setvariable variable=SSTATE_MIRRORS_DIR;]${SSTATE_MIRRORS_DIR}"
-
+    check_freespace
 }
 
 function free_space_packages() {
