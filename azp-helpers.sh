@@ -294,8 +294,6 @@ function create_local_dirs() {
     sudo chown vsts:vsts ${SSTATE_MIRRORS_DIR}
     sudo chown vsts:vsts ${DEPLOY_ARTIFACTS_DIR}
     check_freespace
-    purge_space
-    analyze_storage
 }
 
 function localconf() {
