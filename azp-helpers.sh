@@ -150,40 +150,47 @@ function setup_yp_deps() {
     ###
     ###  Install YP dependencies
     ###
-    sudo DEBIAN_FRONTEND=noninteractive apt-mark hold grub-efi-amd64-bin
-    sudo DEBIAN_FRONTEND=noninteractive apt-mark hold grub-efi-amd64-signed
+    . /etc/os-release
+
+    if [ "$ID" = "ubuntu" ] && [ "$VERSION_ID" = "24.04" ]; then
+        YP_DEPS="build-essential chrpath cpio debianutils diffstat file gawk gcc git iputils-ping libacl1 locales python3 python3-git python3-jinja2 python3-pexpect python3-pip python3-subunit socat texinfo unzip wget xz-utils zstd"
+    else
+        sudo DEBIAN_FRONTEND=noninteractive apt-mark hold grub-efi-amd64-bin
+        sudo DEBIAN_FRONTEND=noninteractive apt-mark hold grub-efi-amd64-signed
+        YP_DEPS=" \
+        build-essential \
+        chrpath \
+        cpio \
+        debianutils \
+        diffstat \
+       gawk \
+       gcc-multilib \
+       git-core \
+    iputils-ping \
+    libegl1-mesa \
+    libsdl1.2-dev \
+    lz4 \
+    mesa-common-dev \
+    pylint \
+    python3 \
+    python3-git \
+    python3-jinja2 \
+    python3-pexpect \
+    python3-pip \
+    python3-subunit \
+    socat \
+    texinfo \
+    unzip \
+    wget \
+    xterm \
+    xz-utils \
+    zstd \
+    "
+    fi
+    
     sudo DEBIAN_FRONTEND=noninteractive apt update
     sudo DEBIAN_FRONTEND=noninteractive apt upgrade
 
-    YP_DEPS=" \
-    gawk \
-    wget \
-    git-core \
-    diffstat \
-    unzip \
-    texinfo \
-    gcc-multilib \
-    build-essential \
-    chrpath \
-    socat \
-    cpio \
-    python3 \
-    python3-pip \
-    python3-pexpect \
-    xz-utils \
-    debianutils \
-    iputils-ping \
-    python3-git \
-    python3-jinja2 \
-    libegl1-mesa \
-    libsdl1.2-dev \
-    pylint \
-    xterm \
-    python3-subunit \
-    mesa-common-dev \
-    lz4 \
-    zstd \
-    "
 
     # Dependencies from the Yocto Quickstart
     retries=0
