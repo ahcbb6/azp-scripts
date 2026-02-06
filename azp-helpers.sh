@@ -133,7 +133,8 @@ function analyze_storage() {
     . /etc/os-release
 
     if [ "$ID" = "ubuntu" ] && [ "$VERSION_ID" = "24.04" ]; then
-        sudo DEBIAN_FRONTEND=noninteractive apt -yq install durep wajig >/dev/null
+        sudo apt update
+        sudo DEBIAN_FRONTEND=noninteractive apt -yq install durep wajig
         print_section "Largest packages"
         wajig large
         print_section "Largest files durep"
