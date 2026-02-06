@@ -127,6 +127,8 @@ function free_space_packages() {
 
     dpkg -S /usr/local/lib/android/
     dpkg -S /usr/local/.ghcup/
+    dpkg -S /usr/lib/google-cloud-sdk
+    dpkg -S /usr/share/swift
 }
 
 function analyze_storage() {
