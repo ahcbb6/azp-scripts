@@ -104,6 +104,8 @@ function free_space_packages() {
     ?name(postgresql.*) \
     ?name(powershell.*) \
     ?name(python-babel.*) \
+    ?name(python3-botocore.*) \
+    ?name(python3-twisted.*) \
     ?name(r-base-core.*) \
     ?name(referenceassemblies.*) \
     ?name(ruby2.*) \
@@ -134,7 +136,7 @@ function analyze_storage() {
         print_section "Largest packages"
         wajig large
         print_section "Largest files durep"
-        durep -td 3 /
+        durep -x -td 3 /
     fi
 
 
@@ -234,7 +236,9 @@ function purge_space () {
     #### There are a lot of tools that we dont need inside the container
 
     export TOFREE=" \
+    /etc/skel/.rustup/ \
     /home/linuxbrew/.linuxbrew/ \
+    /home/vsts/.rustup/ \
     /home/vsts/agents/*.tgz \
     /home/vsts/agents/2.150.3/ \
     /home/vsts/agents/2.152.0/ \
@@ -242,9 +246,6 @@ function purge_space () {
     /home/vsts/agents/2.160.1/ \
     /home/vsts/agents/2.162.0/ \
     /home/vsts/agents/2.171.1/ \
-    /home/vsts/.rustup/ \
-    /etc/skel/.rustup/ \
-    /usr/share/sbt/bin \
     /imagegeneration/ \
     /opt/* \
     /usr/lib/cgi-bin \
@@ -265,7 +266,6 @@ function purge_space () {
     /usr/local/graalvm/ \
     /usr/local/julia*/ \
     /usr/local/lib/android/ \
-    /usr/local/lib/android/ \
     /usr/local/lib/heroku/ \
     /usr/local/lib/node* \
     /usr/local/n/ \
@@ -285,7 +285,7 @@ function purge_space () {
     /usr/share/man \
     /usr/share/miniconda/ \
     /usr/share/rust \
-    /usr/share/swift/ \
+    /usr/share/sbt/bin \
     /usr/share/swift/ \
     /usr/share/vim/ \
     /var/cache/apt/ \
