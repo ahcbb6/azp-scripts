@@ -154,6 +154,7 @@ function setup_yp_deps() {
 
     if [ "$ID" = "ubuntu" ] && [ "$VERSION_ID" = "24.04" ]; then
         YP_DEPS="build-essential chrpath cpio debianutils diffstat file gawk gcc git iputils-ping libacl1 locales python3 python3-git python3-jinja2 python3-pexpect python3-pip python3-subunit socat texinfo unzip wget xz-utils zstd"
+        echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
     else
         sudo DEBIAN_FRONTEND=noninteractive apt-mark hold grub-efi-amd64-bin
         sudo DEBIAN_FRONTEND=noninteractive apt-mark hold grub-efi-amd64-signed
@@ -429,6 +430,7 @@ function clone_layers() {
 function add_layers() {
     print_section "Creating bblayers.conf"
     find ~/
+    analyze_storage
     for layer in "$@"
     do
         echo "Processing ${layer}"
