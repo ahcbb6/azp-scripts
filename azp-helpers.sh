@@ -126,15 +126,22 @@ function free_space_packages() {
 
 function analyze_storage() {
     print_section "Analyzing Storage"
-    # sudo DEBIAN_FRONTEND=noninteractive apt -yq install durep wajig >/dev/null
-    # print_section "Largest packages"
-    # wajig large
+
+    . /etc/os-release
+
+    if [ "$ID" = "ubuntu" ] && [ "$VERSION_ID" = "24.04" ]; then
+        sudo DEBIAN_FRONTEND=noninteractive apt -yq install durep wajig >/dev/null
+        print_section "Largest packages"
+        wajig large
+        print_section "Largest files durep"
+        durep -td 3 /
+    fi
+
+
     print_section "Largest files (dh/du)"
     df -h
     du -Sh / 2>/dev/null | sort -rh | head -n 200
     du -akS -d 4  / 2>/dev/null | sort -n -r | head -n 50
-    # print_section "Largest files durep"
-    # durep -td 3 /
 }
 
 function setup_yp_deps() {
