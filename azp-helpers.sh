@@ -124,6 +124,9 @@ function free_space_packages() {
     if [ $? -ne 0 ]; then
         echo ${aptOutput}
     fi
+
+    dpkg -S /usr/local/lib/android/
+    dpkg -S /usr/local/.ghcup/
 }
 
 function analyze_storage() {
