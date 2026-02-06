@@ -116,12 +116,12 @@ function free_space_packages() {
     sudo DEBIAN_FRONTEND=noninteractive apt update
 
     # Only show output if cmd doesnt execute successfully
-    echo ""
-    echo "Purging unused packages..."
-    aptOutput=$(sudo DEBIAN_FRONTEND=noninteractive apt purge ${UNUSED_PACKAGES})
-    if [ $? -ne 0 ]; then
-        echo ${aptOutput}
-    fi
+    # echo ""
+    # echo "Purging unused packages..."
+    # aptOutput=$(sudo DEBIAN_FRONTEND=noninteractive apt purge ${UNUSED_PACKAGES})
+    # if [ $? -ne 0 ]; then
+    #     echo ${aptOutput}
+    # fi
 }
 
 function analyze_storage() {
