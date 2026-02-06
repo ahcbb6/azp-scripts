@@ -399,7 +399,8 @@ function clone_layers() {
                     git clone https://git.openembedded.org/bitbake -b ${BRANCHNAME}
                 else
                     echo "Cloning from Github"
-                    git clone https://github.com/ahcbb6/poky.git -b ${BRANCHNAME}
+                    git clone https://github.com/ahcbb6/openembedded-core.git -b ${BRANCHNAME}
+                    git clone https://github.com/ahcbb6/bitbake.git -b ${BRANCHNAME}
                 fi
                 cd openembedded-core/
                 # Print out where we were before rebase
