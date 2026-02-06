@@ -100,6 +100,7 @@ function free_space_packages() {
     ?name(netstandard-targeting-pack.*) \
     ?name(nginx.*) \
     ?name(openjdk.*) \
+    ?name(php8.3.*) \
     ?name(podman.*) \
     ?name(postgresql.*) \
     ?name(powershell.*) \
@@ -147,6 +148,7 @@ function analyze_storage() {
 }
 
 function setup_yp_deps() {
+    analyze_storage
     free_space_packages
     print_section "Installing Yocto Project Dependencies"
     ###
