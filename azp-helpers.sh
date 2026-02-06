@@ -431,13 +431,13 @@ function clone_layers() {
                 ;;
         esac
     done
+    find ~/
+    purge_space
+    analyze_storage
 }
 
 function add_layers() {
     print_section "Creating bblayers.conf"
-    find ~/
-    purge_space
-    analyze_storage
     for layer in "$@"
     do
         echo "Processing ${layer}"
