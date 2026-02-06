@@ -124,11 +124,6 @@ function free_space_packages() {
     if [ $? -ne 0 ]; then
         echo ${aptOutput}
     fi
-
-    dpkg -S /usr/local/lib/android/
-    dpkg -S /usr/local/.ghcup/
-    dpkg -S /usr/lib/google-cloud-sdk
-    dpkg -S /usr/share/swift
 }
 
 function analyze_storage() {
@@ -296,6 +291,8 @@ function purge_space () {
     /var/cache/apt/ \
     /var/lib/apt/lists \
     "
+    for i in ${TOFREE};do echo "$i"; sudo dpkg -S $i; done;
+    
     # This cant be done in parallel
     echo "Removing:"
     for i in ${TOFREE};do echo "$i"; sudo rm -rf $i; done;
@@ -439,6 +436,7 @@ function clone_layers() {
 function add_layers() {
     print_section "Creating bblayers.conf"
     find ~/
+    purge_space
     analyze_storage
     for layer in "$@"
     do
