@@ -138,6 +138,7 @@ function analyze_storage() {
 }
 
 function setup_yp_deps() {
+    free_space_packages
     print_section "Installing Yocto Project Dependencies"
     ###
     ###  Install YP dependencies
