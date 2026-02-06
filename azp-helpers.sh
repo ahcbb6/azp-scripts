@@ -295,7 +295,7 @@ function create_local_dirs() {
     sudo chown vsts:vsts ${SSTATE_MIRRORS_DIR}
     sudo chown vsts:vsts ${DEPLOY_ARTIFACTS_DIR}
     if [ "$(ls -A ~/base-artifacts)" ]; then
-        mv ~/base-artifacts/* ${SSTATE_DIR}/
+        mv ~/1/base-artifacts/* ${SSTATE_DIR}/
     fi
     check_freespace
 }
