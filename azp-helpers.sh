@@ -312,6 +312,9 @@ function create_local_dirs() {
     if [ "$(ls -A ~/work/1/base-artifacts)" ]; then
         mv ~/work/1/base-artifacts/* ${SSTATE_DIR}/
     fi
+    if [ "$(ls -A ~/work/1/base-downloads)" ]; then
+        mv ~/work/1/base-downloads/* ${DL_DIR}/
+    fi
     check_freespace
 }
 
