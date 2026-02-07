@@ -27,6 +27,7 @@ function global_variables_pipeline() {
     print_section "Setting pipeline variables"
     echo "##vso[task.setvariable variable=DEPLOY_ARTIFACTS_DIR;]${DEPLOY_ARTIFACTS_DIR}"
     echo "##vso[task.setvariable variable=SSTATE_DIR;]${SSTATE_DIR}"
+    echo "##vso[task.setvariable variable=DL_DIR;]${DL_DIR}"
     echo "##vso[task.setvariable variable=SSTATE_MIRRORS_DIR;]${SSTATE_MIRRORS_DIR}"
     check_freespace
 }
