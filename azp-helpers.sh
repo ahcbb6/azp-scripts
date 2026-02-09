@@ -315,11 +315,11 @@ function create_local_dirs() {
     sudo chown vsts:vsts ${DL_DIR}
     sudo chown vsts:vsts ${SSTATE_MIRRORS_DIR}
     sudo chown vsts:vsts ${DEPLOY_ARTIFACTS_DIR}
-    if [ "$(ls -A ~/work/1/base-artifacts)" ]; then
-        mv ~/work/1/base-artifacts/* ${SSTATE_DIR}/
+    if [ "$(ls -A ~/work/1/native-artifacts)" ]; then
+        mv ~/work/1/native-artifacts/* ${SSTATE_DIR}/
     fi
-    if [ "$(ls -A ~/work/1/base-downloads)" ]; then
-        mv ~/work/1/base-downloads/* ${DL_DIR}/
+    if [ "$(ls -A ~/work/1/native-downloads)" ]; then
+        mv ~/work/1/native-downloads/* ${DL_DIR}/
     fi
     check_freespace
 }
